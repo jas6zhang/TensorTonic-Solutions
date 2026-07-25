@@ -39,3 +39,7 @@ def linear_regression(X, y, lr, epochs):
     weights = [round(float(v), 4) for v in w]
     bias = round(float(b), 4)
     return (weights, bias)
+
+    # Why doesn't w -= lr * dw need a special operator?
+
+# Because w, lr, and dw are all NumPy objects.
