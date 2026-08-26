@@ -1,0 +1,38 @@
+def ridge_regression(X, y, lr, epochs, alpha):
+    """
+    Perform ridge regression using gradient descent.
+    Returns: tuple of (weights_list, bias)
+    """
+    
+    b = 0.0
+    X = np.array(X)
+    y = np.array(y) 
+    n, d = X.shape 
+    w = np.zeros(d)
+
+    for _ in range(epochs): 
+        # The gradients of MSE with respect to the parameters are:
+        y_hat = X @ w + b
+        # *Element-wise multiplicationnp.multiply()
+        # @Matrix multiplication (Dot product)np.matmul() or np.dot()
+        # Update rules at each iteration:
+        dw = (2.0 / n) * np.transpose(X) @ (y_hat - y) +2 * alpha * w
+        db =  (2.0 / n) * np.sum(y_hat - y)
+
+        # reduce MSE 
+        # lr stands for learning rate.
+
+        # If you increase w, the loss increases.
+        # So to reduce the loss, you should decrease w.
+
+# It's a small positive number that controls how large of a step gradient descent takes when updating the model parameters.
+        w -= lr * dw 
+        b -= lr * db 
+
+    weights = [round(float(v), 4) for v in w]
+    bias = round(float(b), 4)
+    return (weights, bias)
+
+    # Why doesn't w -= lr * dw need a special operator?
+
+# Because w, lr, and dw are all NumPy objects.
